@@ -20,7 +20,7 @@ const upload = multer({ storage: multer.memoryStorage() })
 app.get('/api/tracks', async (req, res) => {
   try {
     const { data, error } = await supabase
-      .from("pistas")   // ← CAMBIADO AQUÍ
+      .from("pistas")   // ← CAMBIADO
       .select("*")
       .order("created_at", { ascending: false })
       .limit(50)
@@ -65,7 +65,7 @@ app.post('/api/upload', upload.single('file'), async (req, res) => {
 
     // Guardar en la tabla
     const { data, error } = await supabase
-      .from("pistas")   // ← CAMBIADO AQUÍ TAMBIÉN
+      .from("pistas")    // ← CAMBIADO
       .insert([
         {
           title,

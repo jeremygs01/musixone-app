@@ -1,18 +1,15 @@
-# MusixOne (musixone-app)
 
-**One world. One sound.**
+# MusixOne — Full Project
 
-Creado por jeremygs01
+## Structure
+- frontend/ (Vercel-ready)
+- backend/ (Render-ready)
 
-## Estructura
-- `frontend/` - React + Vite frontend (deploy a Vercel)
-- `server/` - Express backend (deploy a Render)
-- `database/` - SQL scripts (create tables in Supabase)
+## Deployment
+### Frontend (Vercel)
+- Set env: VITE_API_URL
 
-## Rápido
-1. Rellena `.env` en `server/` con las credenciales de Supabase y Stripe (ver `.env.example`).
-2. Despliega backend en Render (root: `server/`).
-3. Despliega frontend en Vercel (root: `frontend/`), añade `VITE_API_URL`.
-
-## Autor
-jeremygs01
+### Backend (Render)
+- Build: npm install
+- Start: node index.js
+- Env: SUPABASE_URL, SUPABASE_ANON_KEY, CORS_ORIGIN, PORT=10000

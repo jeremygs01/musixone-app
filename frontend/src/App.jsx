@@ -1,29 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import HomeExact from "./pages/HomeExact";
+import HomePremium from "./pages/HomePremium";
 
-export default function App() {
-  const [backendData, setBackendData] = useState(null);
-
-  const API = import.meta.env.VITE_API_URL;
-
-  useEffect(() => {
-    fetch(`${API}/`)
-      .then((res) => res.json())
-      .then((data) => setBackendData(data))
-      .catch((err) => {
-        console.error("ERROR:", err);
-        setBackendData({ ok: false, error: "No se pudo conectar al backend" });
-      });
-  }, []);
-
+export default function App(){
+  const [variant, setVariant] = useState("exact");
   return (
-    <div style={{ padding: "40px", fontFamily: "sans-serif" }}>
-      <h1>MusixOne Frontend Running ✔</h1>
+    <div className="min-h-screen bg-neutral-900 text-white">
+      <header className="p-4 flex items-center justify-between max-w-6xl mx-auto">
+        <div className="text-2xl font-bold">Musix<span className="text-green-400">One</span></div>
+        <div className="space-x-2">
+          <button onClick={() => setVariant('exact')} className={"px-3 py-1 rounded "+(variant==='exact'?'bg-green-500 text-neutral-900':'bg-neutral-800')}>Exact</button>
+          <button onClick={() => setVariant('premium')} className={"px-3 py-1 rounded "+(variant==='premium'?'bg-purple-600':'bg-neutral-800')}>Premium</button>
+        </div>
+      </header>
 
-      <h3 style={{ marginTop: "20px" }}>Conexión al backend:</h3>
-
-      <pre style={{ background: "#f3f3f3", padding: "15px" }}>
-        {JSON.stringify(backendData, null, 2)}
-      </pre>
+      {variant === "exact" ? <HomeExact /> : <HomePremium />}
     </div>
-  );
+);
 }

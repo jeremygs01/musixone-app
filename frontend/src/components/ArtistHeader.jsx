@@ -1,0 +1,1 @@
+export default function ArtistHeader(){return (<div>Header</div>);}

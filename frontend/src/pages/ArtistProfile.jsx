@@ -1,0 +1,1 @@
+export default function ArtistProfile(){return (<div style={{color:'white'}}>Artist Profile Page Placeholder</div>);}

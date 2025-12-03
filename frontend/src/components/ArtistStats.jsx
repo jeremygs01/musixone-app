@@ -1,0 +1,1 @@
+export default function ArtistStats(){return (<div>Stats</div>);}

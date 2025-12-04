@@ -1,0 +1,1 @@
+// ExploreCarousel.jsx placeholder

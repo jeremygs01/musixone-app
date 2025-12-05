@@ -1,14 +1,1 @@
-import ArtistCard from "./ArtistCard";
-import CarouselSection from "./CarouselSection";
-
-export default function ExploreSection({ artists = [] }) {
-  return (
-    <CarouselSection title="🎤 Artistas del Momento">
-      {artists.map((artist) => (
-        <div key={artist.id} className="min-w-[160px]">
-          <ArtistCard artist={artist} />
-        </div>
-      ))}
-    </CarouselSection>
-  );
-}
+import ArtistCard from './ArtistCard'; import CarouselSection from './CarouselSection'; export default function ExploreSection({ artists = [] }) { return (<CarouselSection title='🎤 Artistas del Momento'>{artists.map((artist)=>(<div key={artist.id} className='min-w-[160px]'><ArtistCard artist={artist}/></div>))}</CarouselSection>); }

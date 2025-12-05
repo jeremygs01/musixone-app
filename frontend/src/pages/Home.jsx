@@ -1,33 +1,70 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Hero from "../components/Hero";
-import Trending from "../components/Trending";
-import ExploreCarousel from "../components/ExploreCarousel";
-import Featured from "../components/Featured";
+import TrendingSection from "../components/TrendingSection";
+import ExploreSection from "../components/ExploreSection";
 
 export default function Home() {
   const [trending, setTrending] = useState([]);
-  const [featured, setFeatured] = useState([]);
-  const [explore, setExplore] = useState([]);
+  const [artists, setArtists] = useState([]);
 
   useEffect(() => {
+    // MOCK PROFESIONAL (luego lo cambiaremos por Supabase)
     const mockTracks = [
-      { id: "t1", title: "Die with a smile", artist: "Kehilyn Gómez", cover: "/placeholders/placeholder_cover.jpg", duration: "3:24", slug: "kehilyn-gomez" },
-      { id: "t2", title: "Night Run", artist: "Jere", cover: "/placeholders/placeholder_cover.jpg", duration: "3:24", slug: "jere" },
-      { id: "t3", title: "Sunrise", artist: "Kehilyn Gómez", cover: "/placeholders/placeholder_cover.jpg", duration: "3:24", slug: "kehilyn-gomez" },
-      { id: "t4", title: "Ocean Drive", artist: "Another", cover: "/placeholders/placeholder_cover.jpg", duration: "2:58", slug: "another" },
+      {
+        id: "1",
+        title: "Die With a Smile",
+        artist: "Kehilyn Gómez",
+        cover: "/placeholders/placeholder_cover.jpg",
+      },
+      {
+        id: "2",
+        title: "Night Run",
+        artist: "Jere",
+        cover: "/placeholders/placeholder_cover.jpg",
+      },
+      {
+        id: "3",
+        title: "Ocean Drive",
+        artist: "Another",
+        cover: "/placeholders/placeholder_cover.jpg",
+      },
     ];
-    setTrending(mockTracks.slice(0,3));
-    setFeatured(mockTracks.slice(0,2));
-    setExplore(mockTracks);
+
+    const mockArtists = [
+      {
+        id: "a1",
+        name: "Kehilyn Gómez",
+        slug: "kehilyn-gomez",
+        genre: "Pop",
+        avatar: "/placeholders/placeholder_avatar.jpg",
+      },
+      {
+        id: "a2",
+        name: "Jere",
+        slug: "jere",
+        genre: "Urbano",
+        avatar: "/placeholders/placeholder_avatar.jpg",
+      },
+      {
+        id: "a3",
+        name: "Another",
+        slug: "another",
+        genre: "Electrónica",
+        avatar: "/placeholders/placeholder_avatar.jpg",
+      },
+    ];
+
+    setTrending(mockTracks);
+    setArtists(mockArtists);
   }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-[#070707] to-[#05060a] text-white">
       <Hero />
-      <main className="max-w-6xl mx-auto px-4 md:px-8 space-y-10 mt-8">
-        <Trending tracks={trending} />
-        <Featured items={featured} />
-        <ExploreCarousel items={explore} title="Explorar nuevos lanzamientos" />
+
+      <main className="max-w-6xl mx-auto px-4 md:px-8 mt-10 space-y-14">
+        <TrendingSection tracks={trending} />
+        <ExploreSection artists={artists} />
       </main>
     </div>
   );

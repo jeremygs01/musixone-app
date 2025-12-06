@@ -2,60 +2,49 @@ import { useEffect, useState } from "react";
 import Hero from "../components/Hero";
 import TrendingSection from "../components/TrendingSection";
 import ExploreSection from "../components/ExploreSection";
+import { supabase } from "../lib/supabase";
 
 export default function Home() {
   const [trending, setTrending] = useState([]);
   const [artists, setArtists] = useState([]);
 
   useEffect(() => {
-    // MOCK PROFESIONAL (luego lo cambiaremos por Supabase)
-    const mockTracks = [
-      {
-        id: "1",
-        title: "Die With a Smile",
-        artist: "Kehilyn Gómez",
-        cover: "/placeholders/placeholder_cover.jpg",
-      },
-      {
-        id: "2",
-        title: "Night Run",
-        artist: "Jere",
-        cover: "/placeholders/placeholder_cover.jpg",
-      },
-      {
-        id: "3",
-        title: "Ocean Drive",
-        artist: "Another",
-        cover: "/placeholders/placeholder_cover.jpg",
-      },
-    ];
+    const loadData = async () => {
+      const { data: tracks, error: trackError } = await supabase
+        .from("tracks")
+        .select(`
+          id,
+          title,
+          cover,
+          views,
+          artists (
+            name
+          )
+        `)
+        .order("views", { ascending: false })
+        .limit(10);
 
-    const mockArtists = [
-      {
-        id: "a1",
-        name: "Kehilyn Gómez",
-        slug: "kehilyn-gomez",
-        genre: "Pop",
-        avatar: "/placeholders/placeholder_avatar.jpg",
-      },
-      {
-        id: "a2",
-        name: "Jere",
-        slug: "jere",
-        genre: "Urbano",
-        avatar: "/placeholders/placeholder_avatar.jpg",
-      },
-      {
-        id: "a3",
-        name: "Another",
-        slug: "another",
-        genre: "Electrónica",
-        avatar: "/placeholders/placeholder_avatar.jpg",
-      },
-    ];
+      const { data: artists, error: artistError } = await supabase
+        .from("artists")
+        .select("*")
+        .limit(12);
 
-    setTrending(mockTracks);
-    setArtists(mockArtists);
+      if (trackError) console.error("Tracks error:", trackError);
+      if (artistError) console.error("Artists error:", artistError);
+
+      setTrending(
+        tracks?.map(t => ({
+          id: t.id,
+          title: t.title,
+          artist: t.artists?.name,
+          cover: t.cover
+        })) || []
+      );
+
+      setArtists(artists || []);
+    };
+
+    loadData();
   }, []);
 
   return (

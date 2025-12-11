@@ -1,0 +1,1 @@
+// ArtistHeader.jsx placeholder

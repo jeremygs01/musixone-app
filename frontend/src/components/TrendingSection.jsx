@@ -1,0 +1,1 @@
+import TrackCard from './TrackCard'; import CarouselSection from './CarouselSection'; export default function TrendingSection({ tracks = [] }) { return (<CarouselSection title='🔥 En Tendencia'>{tracks.map((track)=>(<div key={track.id} className='min-w-[160px]'><TrackCard track={track}/></div>))}</CarouselSection>); }

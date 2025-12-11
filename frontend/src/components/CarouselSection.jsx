@@ -1,0 +1,1 @@
+export default function CarouselSection({ title, children }) { return (<section><h2 className='text-xl font-bold mb-4'>{title}</h2><div className='flex gap-4 overflow-x-auto pb-2 scrollbar-hide'>{children}</div></section>); }
